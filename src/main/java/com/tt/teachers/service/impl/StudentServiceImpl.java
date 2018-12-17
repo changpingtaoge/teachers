@@ -26,4 +26,9 @@ public class StudentServiceImpl implements StudentService{
     public int updateStudent(Student student) {
         return studentDao.updateStudent(student);
     }
+
+    @Transactional
+    public int deleteStudent(Integer studentNo) {
+        return studentDao.deleteStudent(studentNo);
+    }
 }

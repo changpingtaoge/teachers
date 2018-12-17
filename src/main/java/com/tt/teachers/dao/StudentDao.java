@@ -1,6 +1,7 @@
 package com.tt.teachers.dao;
 
 import com.tt.teachers.pojo.Student;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -20,4 +21,7 @@ public interface StudentDao {
 
     @Update("update student set studentName = #{studentName},loginPwd = #{loginPwd},phone = #{phone} where studentNo = #{studentNo}")
     int updateStudent(Student student);
+
+    @Delete("delete from student where studentNo = #{studentNo}")
+    int deleteStudent(Integer studentNo);
 }

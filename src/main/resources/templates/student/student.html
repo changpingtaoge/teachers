@@ -27,7 +27,7 @@
 </head>
 <body>
     <!--1.前端提供的table，一会将使用bootstrap框架进行ajax异步请求，将数据渲染到table中-->
-    <table id="table_stu" data-toggle="table" data-height="400">
+    <table id="table_stu" data-toggle="table" data-height="390">
     </table>
     <!--2.前端提供的弹出框，负责编辑信息的显示-->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -100,8 +100,18 @@
            $("#stuPhone").val(row.phone);
         },
         "click .delete":function(e,value,row,index) {
-           
-
+            var stuNo = row.studentNo;
+            var isOK = confirm("你确定要删除吗？")
+            if(isOK){
+                $.ajax({
+                    url:"/stu/deleteStudent/"+stuNo,
+                    type:"DELETE",
+                    success:function (data) {
+                        alert(data);
+                        window.location.reload();
+                    }
+                })
+            }
         }
     }
 

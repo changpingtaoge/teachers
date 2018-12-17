@@ -10,4 +10,6 @@ public interface StudentService {
     List<Student> studentList();
 
     int updateStudent(Student student);
+
+    int deleteStudent(Integer studentNo);
 }

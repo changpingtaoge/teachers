@@ -3,6 +3,7 @@ package com.tt.teachers.controller;
 import com.tt.teachers.pojo.Student;
 import com.tt.teachers.service.StudentService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -83,5 +84,15 @@ public class StudentController {
             return "/student/student";
         }
         return "/student/student";
+    }
+
+    @RequestMapping(value = "/deleteStudent/{studentNo}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public Object deleteStudent(@PathVariable Integer studentNo) {
+        int result = studentService.deleteStudent(studentNo);
+        if (result>0){
+            return "删除成功";
+        }
+        return "删除失败";
     }
 }
