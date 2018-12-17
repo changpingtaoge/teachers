@@ -5,10 +5,12 @@ import com.tt.teachers.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/stu")
@@ -20,6 +22,12 @@ public class StudentController {
     public String login() {
         return "/student/login";
     }
+
+    @RequestMapping("/student")
+    public String student() {
+        return "/student/student";
+    }
+
     @RequestMapping("/index")
     public String index(HttpSession session) {
         String studentName = (String) session.getAttribute("studentName");
@@ -50,4 +58,14 @@ public class StudentController {
         session.removeAttribute("studentName");
         return "redirect:/stu/login";
     }
+
+    @RequestMapping("/studentList")
+    @ResponseBody
+    public Object studentList() {
+        List<Student> list = studentService.studentList();
+        return list;
+    }
+
+
+
 }
