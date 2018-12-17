@@ -66,6 +66,22 @@ public class StudentController {
         return list;
     }
 
-
-
+    @RequestMapping(value = "/updateStu",method = RequestMethod.POST)
+    public String updateStu(HttpServletRequest request) {
+        String stuNo = request.getParameter("stuNo");
+        Integer studentNo = Integer.parseInt(stuNo);
+        String stuName = request.getParameter("stuName");
+        String stuPwd = request.getParameter("stuPwd");
+        String stuPhone =  request.getParameter("stuPhone");
+        Student student = new Student();
+        student.setStudentNo(studentNo);
+        student.setLoginPwd(stuPwd);
+        student.setStudentName(stuName);
+        student.setPhone(stuPhone);
+        int result = studentService.updateStudent(student);
+        if (result>0){
+            return "/student/student";
+        }
+        return "/student/student";
+    }
 }

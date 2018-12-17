@@ -4,6 +4,7 @@ import com.tt.teachers.dao.StudentDao;
 import com.tt.teachers.pojo.Student;
 import com.tt.teachers.service.StudentService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,5 +20,10 @@ public class StudentServiceImpl implements StudentService{
 
     public List<Student> studentList() {
         return studentDao.studentList();
+    }
+
+    @Transactional
+    public int updateStudent(Student student) {
+        return studentDao.updateStudent(student);
     }
 }

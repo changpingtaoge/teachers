@@ -3,6 +3,7 @@ package com.tt.teachers.dao;
 import com.tt.teachers.pojo.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,4 +17,7 @@ public interface StudentDao {
 
     @Select("select * from student")
     List<Student> studentList();
+
+    @Update("update student set studentName = #{studentName},loginPwd = #{loginPwd},phone = #{phone} where studentNo = #{studentNo}")
+    int updateStudent(Student student);
 }
