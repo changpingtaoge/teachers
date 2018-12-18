@@ -174,7 +174,7 @@ body {
 .btn-new:hover,.btn-new:active{
     color: #fff;
 }
-.hd{ background: #f4f4f4; padding: 20px 0px 20px 15px;}
+.hd{padding: 20px 0px 20px 15px;}
 
 .tr_self{
     background-color: #006ab8;
