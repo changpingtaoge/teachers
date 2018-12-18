@@ -160,18 +160,60 @@
             ]
         })
     }
-
     getResultFn();
 
 </script>
-<!--2.关于表格点击每一行tr背景颜色的变化。添加了一个class——》tr_new，后面的操作全是通过这个class取获取主键进行操作的-->
+<!--2.关于表格点击每一行tr背景颜色的变化。添加了一个class——》tr_new，后面的操作全是通过这个class去获取主键进行操作的-->
 <script>
-   
+   $(function () {
+       $("#table_result tbody").on("click","tr",function () {
+           $("#table_result tbody tr").removeClass("tr_new");
+           $(this).addClass("tr_new");
+       })
+   })
 </script>
 
 <!--3.对添加，保存，编辑，取消编辑，删除，全部删除进行对应的操作-->
 <script>
-   
+   $(function () {
+       $("#edit").on("click",function () {
+           var trFather = $(".tr_new");
+           if(trFather.length!=1){
+               alert("请选择一行数据！");
+           }else {
+               var child = trFather.children();
+               child[5].innerHTML ='<input type="text" class="studentResult" size="3" maxlength="3" value="'+child[5].innerText+'"/>';
+           }
+       })
+
+       $("#cancel").on("click",function () {
+           window.location.reload();
+       })
+       
+       $("#save").on("click",function () {
+           var trFather = $(".tr_new");
+           if(trFather.length!=1){
+               alert('请选择一行数据');
+           }else {
+               var resultNo = trFather.children()[0].innerText;
+               var studentResult = $(".studentResult").val();
+               $.ajax({
+                   url:"/res/updateResult",
+                   type:"PUT",
+                   dataType:"json",
+                   data:{
+                       resultNo:resultNo,
+                       studentResult:studentResult
+                   },
+                   success:function (data) {
+                       alert(data);
+                       window.location.reload();
+                   }
+               })
+           }
+       })
+       
+   })
 </script>
 <script>
 
