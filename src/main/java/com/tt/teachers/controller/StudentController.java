@@ -96,4 +96,16 @@ public class StudentController {
         }
         return JsonResult.no("删除失败",result);
     }
+
+
+    @RequestMapping(value = "/findStuByNo/{studentNo}",method = RequestMethod.GET)
+    @ResponseBody
+    public Object findStuByNo(@PathVariable Integer studentNo) {
+        Student student = studentService.findStuByNo(studentNo);
+        if (student!=null){
+            return JsonResult.ok("温馨提示：有该学生",student);
+        }
+        return JsonResult.no("温馨提示：没有该学生",student);
+    }
+
 }

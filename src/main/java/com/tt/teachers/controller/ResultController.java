@@ -1,9 +1,11 @@
 package com.tt.teachers.controller;
 
 import com.tt.teachers.pojo.Result;
+import com.tt.teachers.pojo.Subject;
 import com.tt.teachers.service.ResultService;
 import com.tt.teachers.utils.JsonResult;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,7 +21,9 @@ public class ResultController {
     private ResultService resultService;
 
     @RequestMapping("/result")
-    public String result() {
+    public String result(Model model) {
+        List<Subject> list = resultService.getSubject();
+        model.addAttribute("subjectList",list);
         return "/result/result";
     }
 
@@ -66,5 +70,6 @@ public class ResultController {
         }
         return JsonResult.no("添加失败！",result);
     }
+
 
 }

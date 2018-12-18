@@ -2,6 +2,7 @@ package com.tt.teachers.service.impl;
 
 import com.tt.teachers.dao.ResultDao;
 import com.tt.teachers.pojo.Result;
+import com.tt.teachers.pojo.Subject;
 import com.tt.teachers.service.ResultService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,5 +32,9 @@ public class ResultServiceImpl implements ResultService{
     @Transactional
     public int addResult(Result result) {
         return resultDao.addResult(result);
+    }
+
+    public List<Subject> getSubject() {
+        return resultDao.getSubject();
     }
 }

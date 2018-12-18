@@ -66,11 +66,13 @@
                         </div>
                         <div class="form-group">
                             <label for="subjectNo">课程编号</label>
-                            <input type="text" class="form-control" id="subjectNo" placeholder="课程编号" required >
+                            <select id="subjectNo" class="form-control" name="subjectNo">
+                                <option th:each="subject:${subjectList}" th:text="${subject.subjectName}" th:value="${subject.subjectNo}"></option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="examDate">考试时间</label>
-                           <input type="date" class="form-control" id="examDate" placeholder="考试时间" required >
+                            <input type="text" id="examDate" name="endTime" placeholder="考试时间" class="form-control form-datetime"  onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm',readOnly:true})" required="required" readonly="">
                         </div>
                         <div class="form-group">
                             <label for="studentResult">学生成绩</label>
@@ -176,6 +178,7 @@
 <!--3.对添加，保存，编辑，取消编辑，删除，全部删除进行对应的操作-->
 <script>
    $(function () {
+       //编辑
        $("#edit").on("click",function () {
            var trFather = $(".tr_new");
            if(trFather.length!=1){
@@ -183,13 +186,15 @@
            }else {
                var child = trFather.children();
                child[5].innerHTML ='<input type="text" class="studentResult" size="3" maxlength="3" value="'+child[5].innerText+'"/>';
+               $("#table_result tbody tr").unbind("click");
            }
+           $(this).unbind("click");
        })
-
+       //取消编辑
        $("#cancel").on("click",function () {
            window.location.reload();
        })
-       
+       //修改
        $("#save").on("click",function () {
            var trFather = $(".tr_new");
            if(trFather.length!=1){
@@ -212,6 +217,7 @@
                })
            }
        })
+       //删除
        $("#del").on("click",function () {
            var trFather = $(".tr_new");
            if(trFather.length!=1){
@@ -232,6 +238,7 @@
                }
            }
        })
+       //添加
        $("#addResult").on("click",function () {
            var studentNo=$("#studentNo").val();
            var subjectNo=$("#subjectNo").val();
@@ -254,12 +261,42 @@
            })
 
        })
+
+
+       $("#studentNo").on("blur",function () {
+           var stuNo = $("#studentNo").val();
+           $("#stuNo").removeClass();
+           if(stuNo!=""){
+               $.ajax({
+                   url:"/stu/findStuByNo/"+stuNo,
+                   type:"GET",
+                   success:function (data) {
+                        $("#stuNo").html(data.msg);
+                        $("#stuNo").addClass("blue");
+                   }
+               })
+           }else {
+               $("#stuNo").html("学号不能为空");
+               $("#stuNo").addClass("red");
+           }
+       })
    })
 </script>
 <script>
 
 </script>
 <style type="text/css">
-   
+   .red{
+       color: #ff4c33;
+       font-size: 9px;
+       font-weight: bolder;
+       margin-left: 455px;
+   }
+   .blue{
+       color: blue;
+       font-size: 9px;
+       font-weight: bolder;
+       margin-left: 415px;
+   }
 </style>
 </html>

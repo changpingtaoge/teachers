@@ -12,4 +12,6 @@ public interface StudentService {
     int updateStudent(Student student);
 
     int deleteStudent(Integer studentNo);
+
+    Student findStuByNo(Integer studentNo);
 }
