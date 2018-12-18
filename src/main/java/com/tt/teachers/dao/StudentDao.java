@@ -16,7 +16,7 @@ public interface StudentDao {
     @Select("select * from student where studentNo = #{studentNo} and loginPwd = #{loginPwd}")
     Student doLogin(Student student);
 
-    @Select("select * from student")
+    @Select("select student.*,grade.gradeName as gradeName from student,grade where student.gradeId = grade.gradeID")
     List<Student> studentList();
 
     @Update("update student set studentName = #{studentName},loginPwd = #{loginPwd},phone = #{phone} where studentNo = #{studentNo}")
