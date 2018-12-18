@@ -22,4 +22,14 @@ public class ResultServiceImpl implements ResultService{
     public int updateResult(Result result) {
         return resultDao.updateResult(result);
     }
+
+    @Transactional
+    public int deleteResult(Integer resultNo) {
+        return resultDao.deleteResult(resultNo);
+    }
+
+    @Transactional
+    public int addResult(Result result) {
+        return resultDao.addResult(result);
+    }
 }

@@ -1,6 +1,7 @@
 package com.tt.teachers.dao;
 
 import com.tt.teachers.pojo.Result;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -17,4 +18,10 @@ public interface ResultDao {
 
     @Update("update result set studentResult = #{studentResult} where resultNo = #{resultNo}")
     int updateResult(Result result);
+
+    @Delete("delete from result where resultNo = #{resultNo}")
+    int deleteResult(Integer resultNo);
+
+    @Update("INSERT INTO result (studentNo, subjectNo, examDate, studentResult)VALUES(#{studentNo},#{subjectNo},#{examDate},#{studentResult});")
+    int addResult(Result result);
 }

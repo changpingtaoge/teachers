@@ -2,6 +2,7 @@ package com.tt.teachers.controller;
 
 import com.tt.teachers.pojo.Student;
 import com.tt.teachers.service.StudentService;
+import com.tt.teachers.utils.JsonResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -91,8 +92,8 @@ public class StudentController {
     public Object deleteStudent(@PathVariable Integer studentNo) {
         int result = studentService.deleteStudent(studentNo);
         if (result>0){
-            return "删除成功";
+            return JsonResult.ok("删除成功",result);
         }
-        return "删除失败";
+        return JsonResult.no("删除失败",result);
     }
 }

@@ -8,4 +8,8 @@ public interface ResultService {
     List<Result> getResult();
 
     int updateResult(Result result);
+
+    int deleteResult(Integer resultNo);
+
+    int addResult(Result result);
 }

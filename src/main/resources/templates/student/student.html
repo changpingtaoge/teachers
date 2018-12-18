@@ -107,7 +107,7 @@
                     url:"/stu/deleteStudent/"+stuNo,
                     type:"DELETE",
                     success:function (data) {
-                        alert(data);
+                        alert(data.msg);
                         window.location.reload();
                     }
                 })
